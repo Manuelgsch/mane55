@@ -22,3 +22,16 @@
       ansible.builtin.apt:
         name: docker
         state: latest
+    
+    - name: Creates directory
+      file:
+        path: /mnt/Loki_PI
+        state: directory
+
+    - name: Mount
+      mount:
+        path: /mnt/Loki_PI
+        src: 192.168.178.150:/volume1/PI3
+        opts: bind
+        fstype: none
+        state: mounted
