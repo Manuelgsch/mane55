@@ -33,5 +33,5 @@
         path: /mnt/Loki_PI
         src: 192.168.178.150:/volume1/PI3
         opts: bind
-        fstype: none
+        fstype: ext4
         state: mounted
