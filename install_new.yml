@@ -27,6 +27,9 @@
       ansible.builtin.apt:
         name: nfs-common
         state: latest
+
+    - name: Unconditionally reboot the machine with all defaults
+      ansible.builtin.reboot:
     
     
     - name: Creates directory
