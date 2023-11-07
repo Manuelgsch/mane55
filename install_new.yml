@@ -23,6 +23,12 @@
         name: docker
         state: latest
     
+    - name: Install the package "nfs"
+      ansible.builtin.apt:
+        name: nfs-common
+        state: latest
+    
+    
     - name: Creates directory
       file:
         path: /mnt/Loki_PI
@@ -33,5 +39,5 @@
         path: /mnt/Loki_PI
         src: 192.168.178.150:/volume1/PI3
         opts: bind
-        fstype: ext4
+        fstype: nfs
         state: mounted
