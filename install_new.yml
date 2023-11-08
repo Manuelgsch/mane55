@@ -36,6 +36,14 @@
       file:
         path: /mnt/Loki_PI
         state: directory
+    
+    - name: Creates directory
+      file:
+        path: /mnt/Loki_HDD
+        state: directory
         
-    - name: Mount Loki
+    - name: Mount Loki_PI
       ansible.builtin.shell: sudo mount -t nfs 192.168.178.150:/volume1/PI3 /mnt/Loki_PI
+    
+    - name: Mount Loki_HDD
+      ansible.builtin.shell: sudo mount -t nfs 192.168.178.150:/volume2/LOKI_HDD /mnt/Loki_HDD
