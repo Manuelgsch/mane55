@@ -36,11 +36,6 @@
       file:
         path: /mnt/Loki_PI
         state: directory
-
-    - name: Mount
-      mount:
-        path: /mnt/Loki_PI
-        src: 192.168.178.150:/volume1/PI3
-        opts: bind
-        fstype: nfs
-        state: mounted
+        
+    - name: Mount Loki
+      ansible.builtin.shell: sudo mount -t nfs 192.168.178.150:/volume1/PI3 /mnt/Loki_PI
