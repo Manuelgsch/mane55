@@ -47,3 +47,21 @@
     
     - name: Mount Loki_HDD
       ansible.builtin.shell: sudo mount -t nfs 192.168.178.150:/volume2/LOKI_HDD /mnt/Loki_HDD
+
+    - name: Ensure /mnt/portainer_files directory exists
+      file:
+        path: /mnt/portainer_files
+        state: directory
+        mode: '0755'
+
+    - name: Start Portainer Container
+      docker_container:
+        name: portainer
+        image: portainer/portainer
+        state: started
+        restart_policy: always
+        ports:
+          - "9000:9000"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /mnt/portainer_files:/data
