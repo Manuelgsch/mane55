@@ -48,6 +48,24 @@
     - name: Mount Loki_HDD
       ansible.builtin.shell: sudo mount -t nfs 192.168.178.150:/volume2/LOKI_HDD /mnt/Loki_HDD
 
+
+    - name: Install required Python libraries
+      apt:
+        name: python3-pip
+        state: present
+      when: ansible_os_family == 'Debian'  # Adjust for other package managers
+
+    - name: Install requests module
+      pip:
+        name: requests
+      become: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+      when: ansible_os_family == 'Debian'  # Adjust for other package managers
+
     - name: Ensure /mnt/portainer_files directory exists
       file:
         path: /mnt/portainer_files
@@ -65,3 +83,5 @@
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
           - /mnt/portainer_files:/data
+
+  
